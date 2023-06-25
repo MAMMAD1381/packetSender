@@ -26,12 +26,24 @@ class Client:
                     print(f'reply from ARP request to {ip_address} is: {reply}')
 
                 case "3":   # UDP
-                    udp = UDP()
-                    udp.send_udp_request()
+                    ip_address = input('pls enter the ip address:\n')
+                    port = input('pls enter the port number:\n')
+                    message = input('pls enter the message you wish to send:\n')
+                    udp = UDP(ip_address, port, message)
+                    success = udp.send_udp_request()
+                    if success:
+                        print(f'udp message was successfully sent to ip address: {udp.ip_address} with port: {udp.port} => message: {udp.message}')
+                    else:
+                        print('error sending udp message')
 
                 case "4":   # TCP
-                    tcp = TCP()
-                    tcp.send_tcp_request()
+                    ip_address = input('pls enter the ip address:\n')
+                    port = input('pls enter the port number:\n')
+                    message = input('pls enter the message you wish to send:\n')
+                    tcp = TCP(ip_address, port, message)
+                    data = tcp.send_tcp_request()
+                    print(data)
+
                 case "5":   # DNS
                     domain_name = input('pls enter dns domain:\n')
                     dns_server = input('pls enter the dns server (default: 8.8.8.8)\n')
