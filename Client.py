@@ -16,8 +16,10 @@ class Client:
             selected_protocol = self.printMenu()
             match selected_protocol:
                 case "1":  # ICMP
-                    icmp = ICMP()
-                    icmp.send_icmp_request()
+                    ip_address = input('pls enter the ip address:\n')
+                    icmp = ICMP(ip_address)
+                    reply = icmp.send_icmp_request()
+                    print(reply)
 
                 case "2":   # ARP
                     ip_address = input('pls enter the ip address\n')
