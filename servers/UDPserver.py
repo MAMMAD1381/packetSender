@@ -7,6 +7,13 @@ s.bind(("127.0.0.1", port))
 print("waiting on port:", port)
 
 while True:
-    data, addr = s.recvfrom(1024)
-    print(str(data).split("'")[1])
-    s.sendto(b"Hello, client!", addr)
+    try:
+        data, addr = s.recvfrom(1024)
+        print(str(data).split("'")[1])
+        s.sendto(b"Hello, client!", addr)
+    except Exception as error:
+        print(error)
+
+
+
+

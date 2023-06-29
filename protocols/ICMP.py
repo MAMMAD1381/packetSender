@@ -7,7 +7,8 @@ import chardet
 
 
 class ICMP:
-    def __init__(self, ip_address):
+    def __init__(self, ip_address, data=''):
+        self.data = data
         self.ip_address = ip_address
 
     def send_icmp_request(self):
@@ -18,7 +19,7 @@ class ICMP:
         packet_id = os.getpid() & 0xFFFF
         packet_checksum = 0
         packet_header = struct.pack("bbHHh", 8, 0, packet_checksum, packet_id, 1)
-        packet_data = b"Hello World"
+        packet_data = bytes(self.data, 'utf-8')
         packet_checksum = self.calculate_checksum(packet_header + packet_data)
         packet_header = struct.pack("bbHHh", 8, 0, socket.htons(packet_checksum), packet_id, 1)
         packet = packet_header + packet_data
